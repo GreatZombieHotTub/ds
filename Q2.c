@@ -4,7 +4,7 @@
 struct student{ //store name, roll no, grade
     char name[30];
     int roll;
-    char grade;
+    char grade[2];
 };
 
 void read(struct student s[], int n){
@@ -13,7 +13,7 @@ void read(struct student s[], int n){
         printf("enter name, roll no. and grade: ");\
         scanf("%s", s[i].name);
         scanf("%d", &s[i].roll);
-        scanf("%s", &s[i].grade);
+        scanf("%s", s[i].grade);
 
  }}
 
@@ -22,7 +22,7 @@ void display(struct student s[], int n){
     for(int i=0; i<n; i++){
         printf("name: %s \t", s[i].name);
         printf("roll no. %d \t", s[i].roll);
-        printf("grade:  %c \n", s[i].grade);
+        printf("grade:  %s \n", s[i].grade);
     }
 }
 
@@ -44,8 +44,7 @@ void main(){
     printf("enter no. of students: ");
     scanf("%d", &n);
     read(s,n);
-    display(s,n);
-    printf("after sorting: \n")
+    printf("after sorting: \n");
     sort(s,n);
     display(s,n);
 
