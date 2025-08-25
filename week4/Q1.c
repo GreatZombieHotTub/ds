@@ -60,7 +60,7 @@ int main() {
     printf("6. Sort in ascending order\n");
     printf("7. Delete every alternate node\n");
     printf("8. Insert element in sorted list\n");
-    printf("0. Exit\n");
+   // printf("0. Exit\n");
 
     int choice, cont;
     do {
@@ -225,9 +225,9 @@ int main() {
             display(head);
             break;
 
-        case 0:
+    /*    case 0:
             printf("Exiting...\n");
-            exit(0);
+            exit(0);*/
 
         default:
             printf("Invalid choice!\n");
@@ -236,6 +236,10 @@ int main() {
         printf("Enter 1 to continue: ");
         scanf("%d", &cont);
     } while (cont == 1);
-
+ while (head) {
+        temp = head;
+        head = head->link;
+        free(temp);
+    }
     return 0;
 }
