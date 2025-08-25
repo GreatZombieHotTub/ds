@@ -4,195 +4,238 @@
 //display the linked list with its changes after every function
 //do while loop
 
+// SINGLY LINKED LIST MENU PROGRAM
 #include <stdio.h>
-#include <string.h>
-struct node{
-int d;
-struct node* link; };
+#include <stdlib.h>
+
+struct node {
+    int d;
+    struct node* link;
+};
 
 void display(struct node* head) {
-if (head == NULL){
-printf("Linked list is empty.\n");
-return;
-}
-struct node* t=head;
-printf("Linked list elements: ");
-while (t!= NULL) {
-printf("%d -> ", t->d);
-t = t->link;
-}
-printf("NULL\n");
-}
-
-void main(){
-struct node *t,*head=NULL, *temp;
-//linked list creation.
-int op;
-do{
-temp=(struct node*)malloc(sizeof(struct node));
-printf("enter element: ");
-scanf("%d",&temp->d);
-temp->link=NULL;
-if(head==NULL){
-    head=temp;
-    t=temp;}
-else{
-    t->link=temp;
-    t=temp;
-}
-printf("enter 1 to continue: ");
-scanf("%d", &op);
-}while(op==1);
-
-printf("original list: ");
-display(head);
-
-/*Insert an element before another specified element in the list
-(Example: Insert 10 before 25)
-➢ Insert an element after another specified element in the list
-(Example: Insert 40 after 25)
-➢ Delete a specified element from the list
-(Example: Delete node containing 15)
-➢ Traverse the list and display all elements
-➢ Reverse the linked list
-(Modify the links such that the list is reversed)
-➢ Sort the list in ascending order
-(Using Bubble Sort or any appropriate algorithm on linked list)
-➢ Delete every alternate node in the list
-(Starting from the second node)
-➢ Insert an element into a sorted linked list while maintaining the sorted order
-(Example: Insert 28 into a list that is already sorted)*/
-
-printf("enter 1 to insert element before key \n");
-printf("enter 2 to insert element after key \n");
-printf("enter 3 to delete node using key \n");
-printf("enter 4 to display list \n");
-printf("enter 5 to reverse list \n");
-printf("enter 6 sort in ascending order\n");
-printf("enter 7 delete every alternate node\n");
-printf("enter 8 insert element in sorted list (note: pls sort list before doing this)\n");
-int choice, cont;
-struct node* e=(struct node*)malloc(sizeof(struct node));
-do{
-int ele,key;
-printf("enter choice: ");
-scanf("%d", &choice);
-switch(choice) {
-case 1:
-    printf("enter element to be inserted and key:");
-    scanf("%d %d",&ele, &key);
-    e->d=ele;
-    e->link=NULL;
-    t=head; temp=head;
-    if(head->d==key){
-        e->link=head;
-        head=e;
+    if (head == NULL) {
+        printf("Linked list is empty.\n");
+        return;
     }
-    while(t->link!=NULL){
-        t=t->link;
-        if(t->d==key){
-            e->link=t;
-            temp->link=e;
+    struct node* t = head;
+    printf("Linked list elements: ");
+    while (t != NULL) {
+        printf("%d -> ", t->d);
+        t = t->link;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct node *t, *head = NULL, *temp;
+    int op;
+
+    // Linked list creation
+    do {
+        temp = (struct node*)malloc(sizeof(struct node));
+        printf("Enter element: ");
+        scanf("%d", &temp->d);
+        temp->link = NULL;
+        if (head == NULL) {
+            head = temp;
+            t = temp;
+        } else {
+            t->link = temp;
+            t = temp;
         }
-        temp=t;
-    }
-    break;
-case 2:
-    t=head; temp=head;
-    printf("enter element to be inserted and key:");
-    scanf("%d %d",&ele, &key);
-    e->d=ele;
-    e->link=NULL;
-    while(t!=NULL){
-        if(t->d==key){
-            e->link=t->link;
-            t->link=e;
-        }} break;
-case 3:
-    t=head; temp=head;
-    printf("enter element to be deleted:");
-    scanf("%d", &key);
-    if(head->d==key){
-        head=head->link;
-    }
-    while(t!=NULL){
-        t=t->link;
-        if(t->d==key){
-                temp->link=t->link;
-                t=t->link;}
-        temp=temp->link;
-    } break;
-case 4:
+        printf("Enter 1 to continue: ");
+        scanf("%d", &op);
+    } while (op == 1);
+
+    printf("Original list: ");
     display(head);
-case 5:
-    //reverse
-    t=head;
-    struct node* prev, next;
-    prev=NULL; next=NULL;
-    while(t!=NULL){
-        next=t->link;
-        t->link=prev;
-        prev=t;
-        t=next;
-    }
-    head=prev; break;
-case 6:
-    t=head; temp=head;
-    //sorting ascending
-    int n=0,small;
-    while(t!=NULL){ n++;}
-    t=head;
-    for(int i=0;i<n-1; i++){
-        temp=temp->link;
-        small=temp->d;
-        for(int j=0; j<n-i-1; j++){
-            if()
+
+    printf("\n--- MENU ---\n");
+    printf("1. Insert element before key\n");
+    printf("2. Insert element after key\n");
+    printf("3. Delete node using key\n");
+    printf("4. Display list\n");
+    printf("5. Reverse list\n");
+    printf("6. Sort in ascending order\n");
+    printf("7. Delete every alternate node\n");
+    printf("8. Insert element in sorted list\n");
+    printf("0. Exit\n");
+
+    int choice, cont;
+    do {
+        int ele, key;
+        printf("\nEnter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+        case 1: // Insert before key
+            printf("Enter element to insert and key: ");
+            scanf("%d %d", &ele, &key);
+            {
+                struct node* e = (struct node*)malloc(sizeof(struct node));
+                e->d = ele;
+                e->link = NULL;
+
+                if (head == NULL) {
+                    printf("List is empty.\n");
+                    free(e);
+                } else if (head->d == key) {
+                    e->link = head;
+                    head = e;
+                } else {
+                    t = head;
+                    temp = head;
+                    while (t != NULL && t->d != key) {
+                        temp = t;
+                        t = t->link;
+                    }
+                    if (t == NULL) {
+                        printf("Key %d not found.\n", key);
+                        free(e);
+                    } else {
+                        e->link = t;
+                        temp->link = e;
+                    }
+                }
+            }
+            display(head);
+            break;
+
+        case 2: // Insert after key
+            printf("Enter element to insert and key: ");
+            scanf("%d %d", &ele, &key);
+            t = head;
+            while (t != NULL && t->d != key)
+                t = t->link;
+            if (t == NULL) {
+                printf("Key %d not found.\n", key);
+            } else {
+                struct node* e = (struct node*)malloc(sizeof(struct node));
+                e->d = ele;
+                e->link = t->link;
+                t->link = e;
+            }
+            display(head);
+            break;
+
+        case 3: // Delete node using key
+            printf("Enter element to delete: ");
+            scanf("%d", &key);
+            if (head == NULL) {
+                printf("List is empty.\n");
+            } else if (head->d == key) {
+                t = head;
+                head = head->link;
+                free(t);
+            } else {
+                t = head;
+                temp = NULL;
+                while (t != NULL && t->d != key) {
+                    temp = t;
+                    t = t->link;
+                }
+                if (t == NULL) {
+                    printf("Key %d not found.\n", key);
+                } else {
+                    temp->link = t->link;
+                    free(t);
+                }
+            }
+            display(head);
+            break;
+
+        case 4: // Display
+            display(head);
+            break;
+
+        case 5: // Reverse
+        {
+            struct node* prev = NULL;
+            struct node* curr = head;
+            struct node* next = NULL;
+            while (curr != NULL) {
+                next = curr->link;
+                curr->link = prev;
+                prev = curr;
+                curr = next;
+            }
+            head = prev;
+            printf("List reversed.\n");
+            display(head);
         }
-    }
+        break;
 
-case 7:
+        case 6: // Sort ascending (Bubble sort)
+        {
+            if (head == NULL) break;
+            int swapped;
+            struct node* ptr1;
+            struct node* lptr = NULL;
+            do {
+                swapped = 0;
+                ptr1 = head;
+                while (ptr1->link != lptr) {
+                    if (ptr1->d > ptr1->link->d) {
+                        int tempVal = ptr1->d;
+                        ptr1->d = ptr1->link->d;
+                        ptr1->link->d = tempVal;
+                        swapped = 1;
+                    }
+                    ptr1 = ptr1->link;
+                }
+                lptr = ptr1;
+            } while (swapped);
+            printf("List sorted.\n");
+            display(head);
+        }
+        break;
 
+        case 7: // Delete every alternate node
+            t = head;
+            while (t != NULL && t->link != NULL) {
+                struct node* del = t->link;
+                t->link = del->link;
+                free(del);
+                t = t->link;
+            }
+            printf("Alternate nodes deleted.\n");
+            display(head);
+            break;
 
-break;
+        case 8: // Insert in sorted list
+            printf("Enter element to insert in sorted list: ");
+            scanf("%d", &ele);
+            {
+                struct node* e = (struct node*)malloc(sizeof(struct node));
+                e->d = ele;
+                e->link = NULL;
 
-case 8:
-    t=head; temp=head;
-     printf("enter element to be inserted:");
-    scanf("%d",&key);
-    e->d=key;
-    e->link=NULL;
-//first find which position to insert it before and then insert there
+                if (head == NULL || head->d >= ele) {
+                    e->link = head;
+                    head = e;
+                } else {
+                    t = head;
+                    while (t->link != NULL && t->link->d < ele)
+                        t = t->link;
+                    e->link = t->link;
+                    t->link = e;
+                }
+            }
+            display(head);
+            break;
 
+        case 0:
+            printf("Exiting...\n");
+            exit(0);
 
-    }
-break;
+        default:
+            printf("Invalid choice!\n");
+        }
 
+        printf("Enter 1 to continue: ");
+        scanf("%d", &cont);
+    } while (cont == 1);
 
-
-
-
-
-
-
-
-
-
-
-    }
-
-
-
-printf("enter 1 to continue");
-scanf("%d", %cont);
-}while(cont==1);
-
-
-
-
-
-
-freeList(head);
-
-
-
+    return 0;
 }
