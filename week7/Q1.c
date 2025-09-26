@@ -1,4 +1,3 @@
-//this code is corrrect
 
 #include <stdio.h>
 #include <stdlib.h>
