@@ -1,4 +1,4 @@
-
+//this code is correct
 #include <stdio.h>
 #include <stdlib.h>
 
