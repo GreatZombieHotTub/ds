@@ -28,3 +28,5 @@ if(top==-1){
 else printf("not a palindrome");
 
 return 0;
+
+https://github.com/Abhijeet-Chandra/DS-Lab
